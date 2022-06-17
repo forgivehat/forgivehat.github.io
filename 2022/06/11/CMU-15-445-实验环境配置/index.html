@@ -27,23 +27,21 @@
 <meta property="og:site_name" content="悉达多">
 <meta property="og:description" content="1.前言我在开始做实验时是windows环境，选择的是wsl + clangd + vsvode的一套开发工具。现在电脑换成了mac M1,如果直接在本地写的话可能有兼容性问题, 于是打算继续使用vscode + clangd，虚拟环境选择docker，然而因为各种原因还折腾了一会儿…">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617155352085.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617155015072.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617160300097.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617160428136.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617160557203.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617161515137.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220514203012031.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617161939824.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617161637617.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173113843.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173228242.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173304920.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173349900.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173447624.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617174308777.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173640456.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617174141918.png">
 <meta property="article:published_time" content="2022-06-11T11:04:11.000Z">
-<meta property="article:modified_time" content="2022-06-17T08:30:50.879Z">
+<meta property="article:modified_time" content="2022-06-17T09:44:56.547Z">
 <meta property="article:author" content="forgivehat">
-<meta property="article:tag" content="C++">
 <meta property="article:tag" content="CMU">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617155352085.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173113843.png">
 
 <link rel="canonical" href="https://forgivehat.github.io/2022/06/11/CMU-15-445-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
 
@@ -199,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-17 16:30:50" itemprop="dateModified" datetime="2022-06-17T16:30:50+08:00">2022-06-17</time>
+                <time title="修改时间：2022-06-17 17:44:56" itemprop="dateModified" datetime="2022-06-17T17:44:56+08:00">2022-06-17</time>
               </span>
 
           
@@ -218,31 +216,28 @@
 
 <h3 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2.环境搭建"></a>2.环境搭建</h3><h4 id="2-1-docker安装"><a href="#2-1-docker安装" class="headerlink" title="2.1 docker安装"></a>2.1 docker安装</h4><p>首先就得安装docker，看你什么系统，自己下好就行，下载地址：<a target="_blank" rel="noopener" href="https://www.docker.com/get-started/">https://www.docker.com/get-started/</a></p>
 <p>安装好docker以后，修改配置</p>
-<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617155352085.png" alt="image-20220617155352085" style="zoom: 33%;" />
+<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173113843.png" alt="image-20220617173113843" style="zoom:33%;" />
 
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;experimental&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;features&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;buildkit&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="2-2-vscode插件"><a href="#2-2-vscode插件" class="headerlink" title="2.2 vscode插件"></a>2.2 vscode插件</h4><p>在vscode里安装对应于容器的Remote插件</p>
-<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617155015072.png" alt="image-20220617155015072" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173228242.png" alt="image-20220617173228242" style="zoom:33%;" />
 
-<h4 id="2-3-创建镜像"><a href="#2-3-创建镜像" class="headerlink" title="2.3 创建镜像"></a>2.3 创建镜像</h4><p><img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617160300097.png" alt="image-20220617160300097"></p>
+<h4 id="2-3-创建镜像"><a href="#2-3-创建镜像" class="headerlink" title="2.3 创建镜像"></a>2.3 创建镜像</h4><p><img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173304920.png" alt="image-20220617173304920"></p>
 <p>点上面这个图标开始创建镜像，然后依次点击下面箭头指向的选项就可以了。</p>
-<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617160428136.png" alt="image-20220617160428136" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173349900.png" alt="image-20220617173349900" style="zoom:33%;" />
 
-<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617160557203.png" alt="image-20220617160557203" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173447624.png" alt="image-20220617173447624" style="zoom:33%;" />
 
 <p>刚刚下载的插件就会根据Dockerfile自动下载所需要的包，耐心等待一段时间就可以了。</p>
 <h4 id="2-4-安装clangd"><a href="#2-4-安装clangd" class="headerlink" title="2.4 安装clangd"></a>2.4 安装clangd</h4><p>首先需要在vscode里安装clangd插件，这个插件本来应该是会在远程主机里安装clangd服务器的，但不知道什么原因现在没法自动安装了，所以只能自己动手。</p>
 <p>clangd官网：<a target="_blank" rel="noopener" href="https://clangd.llvm.org/installation">https://clangd.llvm.org/installation</a></p>
 <p>按照提示，安装clangd-12（我这是已经安装好了）</p>
-<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617161515137.png" alt="image-20220617161515137" style="zoom:50%;" />
-
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install clangd-12</span><br></pre></td></tr></table></figure>
 
 <p>这里有一个坑，bustub提供的DockerFile，Ubuntu版本指定为18.04，但是这个版本好像没法用apt下clangd-12，于是我后面将版本换成了20.04，下载成功</p>
 <p>虽然下载成功了，但是VS code的clangd插件根本就没识别到我的clangd-12，局势再次陷入僵局，直到最后搜到一篇博客，找到这么几条命令：</p>
-<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220514203012031.png" alt="image-20220514203012031" style="zoom: 33%;" />
-
+<p><img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617174308777.png" alt="image-20220617174308777"></p>
 <p>我把10改成12，最后成功启动…</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100</span><br></pre></td></tr></table></figure>
 
@@ -250,9 +245,8 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clangd</span><br></pre></td></tr></table></figure>
 
-<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617161939824.png" alt="image-20220617161939824" style="zoom:50%;" />
-
-<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617161637617.png" alt="image-20220617161637617" style="zoom: 25%;" />
+<p><img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173640456.png" alt="image-20220617173640456"></p>
+<img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617174141918.png" alt="image-20220617174141918" style="zoom:33%;" />
 
 <p>只要显示了上面红框里的字，clangd就正常工作了</p>
 <p>END…</p>
@@ -265,7 +259,6 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C++</a>
               <a href="/tags/CMU/" rel="tag"># CMU</a>
               <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
           </div>
