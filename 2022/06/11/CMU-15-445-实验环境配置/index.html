@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"forgivehat.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1.前言我在开始做实验时是windows环境，选择的是wsl + clangd + vsvode的一套开发工具。现在电脑换成了mac M1,如果直接在本地写的话可能有兼容性问题, 于是打算继续使用vscode + clangd，虚拟环境选择docker，然而因为各种原因还折腾了一会儿…">
+  <meta name="description" content="前言我在开始做实验时是windows环境，选择的是wsl + clangd + vsvode的一套开发工具。现在电脑换成了mac M1,如果直接在本地写的话可能有兼容性问题, 于是打算继续使用vscode + clangd，虚拟环境选择docker，然而因为各种原因还折腾了一会儿…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CMU 15-445-实验环境配置">
 <meta property="og:url" content="https://forgivehat.github.io/2022/06/11/CMU-15-445-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="悉达多">
-<meta property="og:description" content="1.前言我在开始做实验时是windows环境，选择的是wsl + clangd + vsvode的一套开发工具。现在电脑换成了mac M1,如果直接在本地写的话可能有兼容性问题, 于是打算继续使用vscode + clangd，虚拟环境选择docker，然而因为各种原因还折腾了一会儿…">
+<meta property="og:description" content="前言我在开始做实验时是windows环境，选择的是wsl + clangd + vsvode的一套开发工具。现在电脑换成了mac M1,如果直接在本地写的话可能有兼容性问题, 于是打算继续使用vscode + clangd，虚拟环境选择docker，然而因为各种原因还折腾了一会儿…">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173113843.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173228242.png">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173640456.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617174141918.png">
 <meta property="article:published_time" content="2022-06-11T11:04:11.000Z">
-<meta property="article:modified_time" content="2022-06-17T09:44:56.547Z">
+<meta property="article:modified_time" content="2022-06-17T09:53:16.788Z">
 <meta property="article:author" content="forgivehat">
 <meta property="article:tag" content="CMU">
 <meta property="article:tag" content="数据库">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-17 17:44:56" itemprop="dateModified" datetime="2022-06-17T17:44:56+08:00">2022-06-17</time>
+                <time title="修改时间：2022-06-17 17:53:16" itemprop="dateModified" datetime="2022-06-17T17:53:16+08:00">2022-06-17</time>
               </span>
 
           
@@ -211,26 +211,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>我在开始做实验时是windows环境，选择的是wsl + clangd + vsvode的一套开发工具。现在电脑换成了mac M1,如果直接在本地写的话可能有兼容性问题, 于是打算继续使用vscode + clangd，虚拟环境选择docker，然而因为各种原因还折腾了一会儿…</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>我在开始做实验时是windows环境，选择的是wsl + clangd + vsvode的一套开发工具。现在电脑换成了mac M1,如果直接在本地写的话可能有兼容性问题, 于是打算继续使用vscode + clangd，虚拟环境选择docker，然而因为各种原因还折腾了一会儿…</p>
 <span id="more"></span>
 
-<h3 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2.环境搭建"></a>2.环境搭建</h3><h4 id="2-1-docker安装"><a href="#2-1-docker安装" class="headerlink" title="2.1 docker安装"></a>2.1 docker安装</h4><p>首先就得安装docker，看你什么系统，自己下好就行，下载地址：<a target="_blank" rel="noopener" href="https://www.docker.com/get-started/">https://www.docker.com/get-started/</a></p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h4><p>首先就得安装docker，看你什么系统，自己下好就行，下载地址：<a target="_blank" rel="noopener" href="https://www.docker.com/get-started/">https://www.docker.com/get-started/</a></p>
 <p>安装好docker以后，修改配置</p>
 <img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173113843.png" alt="image-20220617173113843" style="zoom:33%;" />
 
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;experimental&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;features&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;buildkit&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="2-2-vscode插件"><a href="#2-2-vscode插件" class="headerlink" title="2.2 vscode插件"></a>2.2 vscode插件</h4><p>在vscode里安装对应于容器的Remote插件</p>
+<h4 id="vscode插件"><a href="#vscode插件" class="headerlink" title="vscode插件"></a>vscode插件</h4><p>在vscode里安装对应于容器的Remote插件</p>
 <img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173228242.png" alt="image-20220617173228242" style="zoom:33%;" />
 
-<h4 id="2-3-创建镜像"><a href="#2-3-创建镜像" class="headerlink" title="2.3 创建镜像"></a>2.3 创建镜像</h4><p><img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173304920.png" alt="image-20220617173304920"></p>
+<h4 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h4><p><img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173304920.png" alt="image-20220617173304920"></p>
 <p>点上面这个图标开始创建镜像，然后依次点击下面箭头指向的选项就可以了。</p>
 <img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173349900.png" alt="image-20220617173349900" style="zoom:33%;" />
 
 <img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/image-20220617173447624.png" alt="image-20220617173447624" style="zoom:33%;" />
 
 <p>刚刚下载的插件就会根据Dockerfile自动下载所需要的包，耐心等待一段时间就可以了。</p>
-<h4 id="2-4-安装clangd"><a href="#2-4-安装clangd" class="headerlink" title="2.4 安装clangd"></a>2.4 安装clangd</h4><p>首先需要在vscode里安装clangd插件，这个插件本来应该是会在远程主机里安装clangd服务器的，但不知道什么原因现在没法自动安装了，所以只能自己动手。</p>
+<h4 id="安装clangd"><a href="#安装clangd" class="headerlink" title="安装clangd"></a>安装clangd</h4><p>首先需要在vscode里安装clangd插件，这个插件本来应该是会在远程主机里安装clangd服务器的，但不知道什么原因现在没法自动安装了，所以只能自己动手。</p>
 <p>clangd官网：<a target="_blank" rel="noopener" href="https://clangd.llvm.org/installation">https://clangd.llvm.org/installation</a></p>
 <p>按照提示，安装clangd-12（我这是已经安装好了）</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install clangd-12</span><br></pre></td></tr></table></figure>
@@ -331,7 +331,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1.前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">2.环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-docker%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 docker安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-vscode%E6%8F%92%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 vscode插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 创建镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-%E5%AE%89%E8%A3%85clangd"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 安装clangd</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#docker%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">docker安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vscode%E6%8F%92%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">vscode插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="nav-number">2.3.</span> <span class="nav-text">创建镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85clangd"><span class="nav-number">2.4.</span> <span class="nav-text">安装clangd</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

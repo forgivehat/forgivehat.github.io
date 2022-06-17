@@ -184,7 +184,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-17 17:44:56" itemprop="dateModified" datetime="2022-06-17T17:44:56+08:00">2022-06-17</time>
+                <time title="修改时间：2022-06-17 17:53:16" itemprop="dateModified" datetime="2022-06-17T17:53:16+08:00">2022-06-17</time>
               </span>
 
           
@@ -198,7 +198,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>我在开始做实验时是windows环境，选择的是wsl + clangd + vsvode的一套开发工具。现在电脑换成了mac M1,如果直接在本地写的话可能有兼容性问题, 于是打算继续使用vscode + clangd，虚拟环境选择docker，然而因为各种原因还折腾了一会儿…</p>
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>我在开始做实验时是windows环境，选择的是wsl + clangd + vsvode的一套开发工具。现在电脑换成了mac M1,如果直接在本地写的话可能有兼容性问题, 于是打算继续使用vscode + clangd，虚拟环境选择docker，然而因为各种原因还折腾了一会儿…</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/06/11/CMU-15-445-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/#more" rel="contents">
@@ -415,7 +415,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-17 16:30:04" itemprop="dateModified" datetime="2022-06-17T16:30:04+08:00">2022-06-17</time>
+                <time title="修改时间：2022-06-17 17:53:55" itemprop="dateModified" datetime="2022-06-17T17:53:55+08:00">2022-06-17</time>
               </span>
 
           
@@ -429,7 +429,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="lab-lock"><a href="#lab-lock" class="headerlink" title="lab-lock"></a>lab-lock</h1><h2 id="一、Memory-allocator"><a href="#一、Memory-allocator" class="headerlink" title="一、Memory allocator"></a>一、Memory allocator</h2><p>每个CPU都有一条对应的空闲内存链表，有利于分配时减少冲突。</p>
+          <h1 id="lab-lock"><a href="#lab-lock" class="headerlink" title="lab-lock"></a>lab-lock</h1><h2 id="Memory-allocator"><a href="#Memory-allocator" class="headerlink" title="Memory allocator"></a>Memory allocator</h2><p>每个CPU都有一条对应的空闲内存链表，有利于分配时减少冲突。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span> <span class="title">lock</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">run</span> *<span class="title">freelist</span>;</span></span><br><span class="line">&#125; kmem[NCPU];</span><br></pre></td></tr></table></figure>
 
 <p>初始化空闲内存表锁。</p>
@@ -491,7 +491,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-17 16:30:15" itemprop="dateModified" datetime="2022-06-17T16:30:15+08:00">2022-06-17</time>
+                <time title="修改时间：2022-06-17 17:53:53" itemprop="dateModified" datetime="2022-06-17T17:53:53+08:00">2022-06-17</time>
               </span>
 
           
@@ -505,7 +505,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="lab-fs"><a href="#lab-fs" class="headerlink" title="lab-fs"></a>lab-fs</h1><h2 id="一、Large-files"><a href="#一、Large-files" class="headerlink" title="一、Large files"></a>一、Large files</h2><p>修改<code>fs.h</code>中关于直接块间接块的定义，前<code>11</code>块为直接快，第<code>12</code>块为一级间接块，第<code>13</code>块为二级间接块。</p>
+          <h1 id="lab-fs"><a href="#lab-fs" class="headerlink" title="lab-fs"></a>lab-fs</h1><h2 id="Large-files"><a href="#Large-files" class="headerlink" title="Large files"></a>Large files</h2><p>修改<code>fs.h</code>中关于直接块间接块的定义，前<code>11</code>块为直接快，第<code>12</code>块为一级间接块，第<code>13</code>块为二级间接块。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NDIRECT 11</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NINDIRECT (BSIZE / sizeof(uint))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NDUBINDIRECT (BSIZE / sizeof(uint)) * (BSIZE / sizeof(uint))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXFILE (NDIRECT + NINDIRECT + NDUBINDIRECT)</span></span><br></pre></td></tr></table></figure>
 
 <p>当要访问的<code>bn(block number)</code>大于<code>NDIRECT + NINDIRECT</code>时，访问二级间接块，仿照一级间接块的查询方式即可，注意需要查询两级地址。</p>

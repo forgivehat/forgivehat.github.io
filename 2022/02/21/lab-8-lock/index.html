@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"forgivehat.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="lab-lock一、Memory allocator每个CPU都有一条对应的空闲内存链表，有利于分配时减少冲突。 1234struct &amp;#123;  struct spinlock lock;  struct run *freelist;&amp;#125; kmem[NCPU];  初始化空闲内存表锁。 1234567voidkinit()&amp;#123;  for(int i &#x3D;0; i &lt; NC">
+  <meta name="description" content="lab-lockMemory allocator每个CPU都有一条对应的空闲内存链表，有利于分配时减少冲突。 1234struct &amp;#123;  struct spinlock lock;  struct run *freelist;&amp;#125; kmem[NCPU];  初始化空闲内存表锁。 1234567voidkinit()&amp;#123;  for(int i &#x3D;0; i &lt; NCPU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lab-8-lock">
 <meta property="og:url" content="https://forgivehat.github.io/2022/02/21/lab-8-lock/index.html">
 <meta property="og:site_name" content="悉达多">
-<meta property="og:description" content="lab-lock一、Memory allocator每个CPU都有一条对应的空闲内存链表，有利于分配时减少冲突。 1234struct &amp;#123;  struct spinlock lock;  struct run *freelist;&amp;#125; kmem[NCPU];  初始化空闲内存表锁。 1234567voidkinit()&amp;#123;  for(int i &#x3D;0; i &lt; NC">
+<meta property="og:description" content="lab-lockMemory allocator每个CPU都有一条对应的空闲内存链表，有利于分配时减少冲突。 1234struct &amp;#123;  struct spinlock lock;  struct run *freelist;&amp;#125; kmem[NCPU];  初始化空闲内存表锁。 1234567voidkinit()&amp;#123;  for(int i &#x3D;0; i &lt; NCPU">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-21T14:19:20.000Z">
-<meta property="article:modified_time" content="2022-06-17T08:30:04.324Z">
+<meta property="article:modified_time" content="2022-06-17T09:53:55.604Z">
 <meta property="article:author" content="forgivehat">
 <meta property="article:tag" content="OS">
 <meta property="article:tag" content="xv6">
@@ -188,7 +188,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-17 16:30:04" itemprop="dateModified" datetime="2022-06-17T16:30:04+08:00">2022-06-17</time>
+                <time title="修改时间：2022-06-17 17:53:55" itemprop="dateModified" datetime="2022-06-17T17:53:55+08:00">2022-06-17</time>
               </span>
 
           
@@ -202,7 +202,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="lab-lock"><a href="#lab-lock" class="headerlink" title="lab-lock"></a>lab-lock</h1><h2 id="一、Memory-allocator"><a href="#一、Memory-allocator" class="headerlink" title="一、Memory allocator"></a>一、Memory allocator</h2><p>每个CPU都有一条对应的空闲内存链表，有利于分配时减少冲突。</p>
+        <h1 id="lab-lock"><a href="#lab-lock" class="headerlink" title="lab-lock"></a>lab-lock</h1><h2 id="Memory-allocator"><a href="#Memory-allocator" class="headerlink" title="Memory allocator"></a>Memory allocator</h2><p>每个CPU都有一条对应的空闲内存链表，有利于分配时减少冲突。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span> <span class="title">lock</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">run</span> *<span class="title">freelist</span>;</span></span><br><span class="line">&#125; kmem[NCPU];</span><br></pre></td></tr></table></figure>
 
 <p>初始化空闲内存表锁。</p>
@@ -222,7 +222,7 @@
 
 
 
-<h2 id="二、Buffer-cache"><a href="#二、Buffer-cache" class="headerlink" title="二、Buffer cache"></a>二、Buffer cache</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NBUCKET      13</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NBUF         (NBUCKET*3)  <span class="comment">// size of disk block cache</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Buffer-cache"><a href="#Buffer-cache" class="headerlink" title="Buffer cache"></a>Buffer cache</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NBUCKET      13</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NBUF         (NBUCKET*3)  <span class="comment">// size of disk block cache</span></span></span><br></pre></td></tr></table></figure>
 
 <p>添加一个timestamp字段，代表该<code>buf</code>最后访问时间</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">buf</span> &#123;</span></span><br><span class="line">  <span class="type">int</span> valid;   <span class="comment">// has data been read from disk?</span></span><br><span class="line">  <span class="type">int</span> disk;    <span class="comment">// does disk &quot;own&quot; buf?</span></span><br><span class="line">  uint dev;</span><br><span class="line">  uint blockno;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">sleeplock</span> <span class="title">lock</span>;</span></span><br><span class="line">  uint refcnt;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// struct buf *prev; // LRU cache list</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">buf</span> *<span class="title">next</span>;</span></span><br><span class="line">  uchar data[BSIZE];</span><br><span class="line"></span><br><span class="line">  uint timestamp;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -325,7 +325,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lab-lock"><span class="nav-number">1.</span> <span class="nav-text">lab-lock</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Memory-allocator"><span class="nav-number">1.1.</span> <span class="nav-text">一、Memory allocator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Buffer-cache"><span class="nav-number">1.2.</span> <span class="nav-text">二、Buffer cache</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lab-lock"><span class="nav-number">1.</span> <span class="nav-text">lab-lock</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-allocator"><span class="nav-number">1.1.</span> <span class="nav-text">Memory allocator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffer-cache"><span class="nav-number">1.2.</span> <span class="nav-text">Buffer cache</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
