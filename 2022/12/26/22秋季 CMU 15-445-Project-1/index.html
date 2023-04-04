@@ -28,7 +28,7 @@
 <meta property="og:description" content="其实我做过去年的lab，但没有写年轻人的第一棵B+树难免是一种遗憾，于是寒假决定写完B+树就收手！ Task #1 - Extendible Hash Table这一部分是要实现一个可拓展哈希表，作为去年的Project-2，我已经接触过了，所以写起来没啥太难得地方，但还是有个bug卡了一会儿。 Bucket的插入删除查找很简单，不再赘述，主要介绍可拓展哈希的扩容原理。 可拓展哈希有一个目录，目录">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-25T19:18:31.000Z">
-<meta property="article:modified_time" content="2023-01-29T05:25:03.928Z">
+<meta property="article:modified_time" content="2023-04-04T15:36:20.515Z">
 <meta property="article:author" content="forgivehat">
 <meta property="article:tag" content="数据库">
 <meta property="article:tag" content="CMU 15-445">
@@ -188,7 +188,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-29 13:25:03" itemprop="dateModified" datetime="2023-01-29T13:25:03+08:00">2023-01-29</time>
+                <time title="修改时间：2023-04-04 23:36:20" itemprop="dateModified" datetime="2023-04-04T23:36:20+08:00">2023-04-04</time>
               </span>
 
           
@@ -283,7 +283,7 @@
 <li><p>Evict函数直接遍历哈希表就行了，我也想不到别的好方法…</p>
 </li>
 </ul>
-<h2 id="Task-3-Buffer-Pool-Manager-Instance"><a href="#Task-3-Buffer-Pool-Manager-Instance" class="headerlink" title="Task #3 - Buffer Pool Manager Instance"></a>Task #3 - Buffer Pool Manager Instance</h2><p>这一部分没啥好说的，网上抄的一大堆（言外之意我之前差不多就是抄的…），配合注释很好理解。</p>
+<h2 id="Task-3-Buffer-Pool-Manager-Instance"><a href="#Task-3-Buffer-Pool-Manager-Instance" class="headerlink" title="Task #3 - Buffer Pool Manager Instance"></a>Task #3 - Buffer Pool Manager Instance</h2><p>这一部分没啥好说的，网上博客很多，配合注释很好理解。</p>
 <p>对于New和Fetch，都是先从freelist找，没找到就淘汰一个frame（Fetch函数需要先查哈希表看有没有要找的page，有的话就直接返回了），所以可以抽出一个公共的函数以供调用。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">BufferPoolManagerInstance::GetFreeFrame</span><span class="params">(<span class="type">frame_id_t</span> *frame_id)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!free_list_.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">    *frame_id = free_list_.<span class="built_in">front</span>();</span><br><span class="line">    free_list_.<span class="built_in">pop_front</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">frame_id_t</span> victim_frame_id = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">if</span> (!replacer_-&gt;<span class="built_in">Evict</span>(&amp;victim_frame_id)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  Page *page = &amp;pages_[victim_frame_id];</span><br><span class="line">  page-&gt;pin_count_ = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> (page-&gt;<span class="built_in">IsDirty</span>()) &#123;</span><br><span class="line">    disk_manager_-&gt;<span class="built_in">WritePage</span>(page-&gt;<span class="built_in">GetPageId</span>(), page-&gt;data_);</span><br><span class="line">  &#125;</span><br><span class="line">  page_table_-&gt;<span class="built_in">Remove</span>(page-&gt;<span class="built_in">GetPageId</span>());</span><br><span class="line">  *frame_id = victim_frame_id;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
