@@ -20,29 +20,24 @@
     var CONFIG = {"hostname":"forgivehat.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="领导人选举">
+  <meta name="description" content="123title: 6.824-lab2总结date: 2023-08-22 00:13:57tags: [分布式系统,6.824]  领导人选举 Raft 将所有节点分为三个身份：  Leader：集群内最多只会有一个 leader，负责发起心跳，响应客户端，创建日志，同步日志。 Candidate：leader 选举过程中的临时角色，由 follower 转化而来，发起投票参与竞选。 Foll">
 <meta property="og:type" content="article">
-<meta property="og:title" content="6.824-lab2总结">
-<meta property="og:url" content="https://forgivehat.github.io/2023/08/21/6.824/6-824-lab2%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="Nathanaël">
+<meta property="og:url" content="https://forgivehat.github.io/2023/08/22/6.824/6-824-lab2%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Nathanaël">
-<meta property="og:description" content="领导人选举">
+<meta property="og:description" content="123title: 6.824-lab2总结date: 2023-08-22 00:13:57tags: [分布式系统,6.824]  领导人选举 Raft 将所有节点分为三个身份：  Leader：集群内最多只会有一个 leader，负责发起心跳，响应客户端，创建日志，同步日志。 Candidate：leader 选举过程中的临时角色，由 follower 转化而来，发起投票参与竞选。 Foll">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://tanxinyu.work/talent-plan-raft-talk/6.png">
 <meta property="og:image" content="https://tanxinyu.work/talent-plan-raft-talk/7.png">
 <meta property="og:image" content="https://tanxinyu.work/talent-plan-raft-talk/8.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/202305031434775.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/202305031434049.png">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-91903b92861fb6848082aaf08f0603eb_r.jpg?source=1940ef5c">
-<meta property="og:image" content="https://picx.zhimg.com/v2-615c303f6470fd0c3a5cf78fe6f6342f_r.jpg?source=1940ef5c">
-<meta property="article:published_time" content="2023-08-21T15:55:57.000Z">
-<meta property="article:modified_time" content="2023-08-21T16:10:26.063Z">
+<meta property="article:published_time" content="2023-08-21T16:13:15.093Z">
+<meta property="article:modified_time" content="2023-08-21T16:13:41.870Z">
 <meta property="article:author" content="Nathanaël">
-<meta property="article:tag" content="分布式系统">
-<meta property="article:tag" content="6.824">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://tanxinyu.work/talent-plan-raft-talk/6.png">
 
-<link rel="canonical" href="https://forgivehat.github.io/2023/08/21/6.824/6-824-lab2%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="https://forgivehat.github.io/2023/08/22/6.824/6-824-lab2%E6%80%BB%E7%BB%93/">
 
 
 <script id="page-configurations">
@@ -55,7 +50,7 @@
   };
 </script>
 
-  <title>6.824-lab2总结 | Nathanaël</title>
+  <title> | Nathanaël</title>
   
 
 
@@ -166,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://forgivehat.github.io/2023/08/21/6.824/6-824-lab2%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="https://forgivehat.github.io/2023/08/22/6.824/6-824-lab2%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -179,7 +174,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          6.824-lab2总结
+          
         </h1>
 
         <div class="post-meta">
@@ -188,16 +183,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 23:55:57" itemprop="dateCreated datePublished" datetime="2023-08-21T23:55:57+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-22 00:13:15 / 修改时间：00:13:41" itemprop="dateCreated datePublished" datetime="2023-08-22T00:13:15+08:00">2023-08-22</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-22 00:10:26" itemprop="dateModified" datetime="2023-08-22T00:10:26+08:00">2023-08-22</time>
-              </span>
 
           
 
@@ -210,9 +199,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="领导人选举"><a href="#领导人选举" class="headerlink" title="领导人选举"></a>领导人选举</h3><span id="more"></span>
+        <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="number">6.824</span><span class="string">-lab2总结</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2023-08-22 00:13:57</span></span><br><span class="line"><span class="attr">tags:</span> [<span class="string">分布式系统</span>,<span class="number">6.824</span>]</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://tanxinyu.work/talent-plan-raft-talk/6.png" alt="img"></p>
+<h3 id="领导人选举"><a href="#领导人选举" class="headerlink" title="领导人选举"></a>领导人选举</h3><p><img src="https://tanxinyu.work/talent-plan-raft-talk/6.png" alt="img"></p>
 <p>Raft 将所有节点分为三个身份：</p>
 <ul>
 <li><code>Leader</code>：集群内最多只会有一个 leader，负责发起心跳，响应客户端，创建日志，同步日志。</li>
@@ -259,11 +248,9 @@
 <p>试想当一个follower节点S1给一个candidate节点S2投票后宕机并立即重启了，此时有另一个节点S3选举计时器超时，成为了candidate并向S1发送投票请求，假如S1没有持久化数据，那么它也会给S3投票，于是它在同一个任期内投了两次票，因此很有可能产生两个leader，由此发生脑裂。</p>
 <p>所以当上述变量发生了修改，就需要进行持久化。</p>
 <h3 id="快照"><a href="#快照" class="headerlink" title="快照"></a>快照</h3><p>raft节点之间、上层service与raft节点的通信过程如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/202305031434775.png" alt="image20230403212720325"></p>
 <p>日志不能无限增长，需要定时进行快照，所以当上层service发现持久化文件的大小增长到一定程度或者时，便可执行生成快照的操作。</p>
 <p>与快照相关的三个api是：</p>
 <p><code>Snapshot</code>：由上层service主动调用，作用是通知下层的raft节点生成快照，快照点为最后一条被apply到状态机的日志的index，如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/forgivehat/MarkdownPicForMyself/master/202305031434049.png" alt="image20230405143419008"></p>
 <p><code>InstallSnapshot</code>：用于leader向log过于落后的follower节点发送最新快照，当follower收到leader发送的快照副本，需要判断快照的时效性，再将快照信息通过ApplyMsg发送给上层service</p>
 <p><code>CondInstallSnapshot</code>：判断下层raft节点在将applyMsg放入applyCh，到上层service收到applyMsg期间有没有apply log，如果apply了新log，则这个snapshot可能是过时的，不能应用到本地。</p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h5 id="脑裂问题"><a href="#脑裂问题" class="headerlink" title="脑裂问题"></a>脑裂问题</h5><p>脑裂的概念：由于网络分区，出现了多个可以读写的leader</p>
@@ -276,7 +263,6 @@
 <ul>
 <li>针对非对称网络分区采用lease</li>
 </ul>
-<p><img src="https://picx.zhimg.com/v2-615c303f6470fd0c3a5cf78fe6f6342f_r.jpg?source=1940ef5c" alt="img"></p>
 
     </div>
 
@@ -285,10 +271,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" rel="tag"># 分布式系统</a>
-              <a href="/tags/6-824/" rel="tag"># 6.824</a>
-          </div>
 
         
 
@@ -296,8 +278,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/07/28/%E9%9A%8F%E7%AC%94/%E5%AD%A4%E7%8B%AC%E7%9A%84%E6%B5%81%E4%BA%91/" rel="prev" title="狼朋友">
-      <i class="fa fa-chevron-left"></i> 狼朋友
+    <a href="/2023/08/22/6.824/6-824-lab1%E6%80%BB%E7%BB%93/" rel="prev" title="6.824-lab1总结">
+      <i class="fa fa-chevron-left"></i> 6.824-lab1总结
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -374,7 +356,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
