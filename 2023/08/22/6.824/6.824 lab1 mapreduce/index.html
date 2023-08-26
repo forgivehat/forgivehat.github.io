@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"forgivehat.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="前言lab1是实现一个MapReduce，大佬们都说挺简单，对我来说还挺有挑战的，太菜了… 基本上抄了大佬的思路——laziest和 worker-stateless，因为不想纯抄所以没有用到channel…… RPC定义">
+  <meta name="description" content="前言lab1是实现一个MapReduce，基本上抄了大佬的思路——laziest和 worker-stateless，因为不想纯抄所以没有用到channel markdown写了挺久了，一直没有上传到博客">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.824-lab1总结">
-<meta property="og:url" content="https://forgivehat.github.io/2023/08/22/6.824/6-824-lab1%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:url" content="https://forgivehat.github.io/2023/08/22/6.824/6.824%20lab1%20mapreduce/index.html">
 <meta property="og:site_name" content="Nathanaël">
-<meta property="og:description" content="前言lab1是实现一个MapReduce，大佬们都说挺简单，对我来说还挺有挑战的，太菜了… 基本上抄了大佬的思路——laziest和 worker-stateless，因为不想纯抄所以没有用到channel…… RPC定义">
+<meta property="og:description" content="前言lab1是实现一个MapReduce，基本上抄了大佬的思路——laziest和 worker-stateless，因为不想纯抄所以没有用到channel markdown写了挺久了，一直没有上传到博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T16:10:24.000Z">
-<meta property="article:modified_time" content="2023-08-21T16:13:51.961Z">
+<meta property="article:modified_time" content="2023-08-26T05:44:26.962Z">
 <meta property="article:author" content="Nathanaël">
 <meta property="article:tag" content="分布式系统">
 <meta property="article:tag" content="6.824">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://forgivehat.github.io/2023/08/22/6.824/6-824-lab1%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="https://forgivehat.github.io/2023/08/22/6.824/6.824%20lab1%20mapreduce/">
 
 
 <script id="page-configurations">
@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://forgivehat.github.io/2023/08/22/6.824/6-824-lab1%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="https://forgivehat.github.io/2023/08/22/6.824/6.824%20lab1%20mapreduce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -180,10 +180,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-08-22 00:10:24 / 修改时间：00:13:51" itemprop="dateCreated datePublished" datetime="2023-08-22T00:10:24+08:00">2023-08-22</time>
+              <time title="创建时间：2023-08-22 00:10:24" itemprop="dateCreated datePublished" datetime="2023-08-22T00:10:24+08:00">2023-08-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-26 13:44:26" itemprop="dateModified" datetime="2023-08-26T13:44:26+08:00">2023-08-26</time>
+              </span>
 
           
 
@@ -196,11 +202,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>lab1是实现一个MapReduce，大佬们都说挺简单，对我来说还挺有挑战的，太菜了…</p>
-<p>基本上抄了<a target="_blank" rel="noopener" href="https://github.com/OneSizeFitsQuorum/MIT6.824-2021">大佬的思路</a>——<code>laziest</code>和 <code>worker-stateless</code>，因为不想纯抄所以没有用到<code>channel</code>……</p>
-<h3 id="RPC定义"><a href="#RPC定义" class="headerlink" title="RPC定义"></a>RPC定义</h3><span id="more"></span>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>lab1是实现一个MapReduce，基本上抄了<a target="_blank" rel="noopener" href="https://github.com/OneSizeFitsQuorum/MIT6.824-2021">大佬的思路</a>——<code>laziest</code>和 <code>worker-stateless</code>，因为不想纯抄所以没有用到<code>channel</code></p>
+<p>markdown写了挺久了，一直没有上传到博客</p>
+<span id="more"></span>
 
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> HeartbeatArgs <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> HeartbeatReply <span class="keyword">struct</span> &#123;</span><br><span class="line">    Filename <span class="type">string</span> <span class="comment">// map阶段使用</span></span><br><span class="line">    JobType  JobType</span><br><span class="line">    Id       <span class="type">int</span> <span class="comment">// map阶段传mapId, reduce阶段传reduceId</span></span><br><span class="line">    NReduce  <span class="type">int</span> <span class="comment">// map阶段使用</span></span><br><span class="line">    NMap     <span class="type">int</span> <span class="comment">// reduce阶段使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> JobFinishArgs <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id       <span class="type">int</span></span><br><span class="line">    JobPhase CurrentPhase</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> JobFinishReply <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="RPC定义"><a href="#RPC定义" class="headerlink" title="RPC定义"></a>RPC定义</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> HeartbeatArgs <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> HeartbeatReply <span class="keyword">struct</span> &#123;</span><br><span class="line">    Filename <span class="type">string</span> <span class="comment">// map阶段使用</span></span><br><span class="line">    JobType  JobType</span><br><span class="line">    Id       <span class="type">int</span> <span class="comment">// map阶段传mapId, reduce阶段传reduceId</span></span><br><span class="line">    NReduce  <span class="type">int</span> <span class="comment">// map阶段使用</span></span><br><span class="line">    NMap     <span class="type">int</span> <span class="comment">// reduce阶段使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> JobFinishArgs <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id       <span class="type">int</span></span><br><span class="line">    JobPhase CurrentPhase</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> JobFinishReply <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="Tasks结构"><a href="#Tasks结构" class="headerlink" title="Tasks结构"></a>Tasks结构</h3><p><code>Coordinator</code>维护一个task列表，初始时为map task列表，当map阶段结束，task列表变更为reduce task</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Task <span class="keyword">struct</span> &#123;</span><br><span class="line">    taskId     <span class="type">int</span> <span class="comment">// 当前taskId, map阶段为mapId, reduce阶段为reduceId</span></span><br><span class="line">    startTime  time.Time</span><br><span class="line">    taskStatus TaskStatus</span><br><span class="line">    fileName   <span class="type">string</span></span><br><span class="line">    jobType    JobType</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -228,8 +234,6 @@
 <p>本lab的MapReduce是单机版的，文件其实都存在本地，所以不需要维护中间文件名，只需要在启动时根据mr-x-x的格式读取文件即可</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doReduceJob</span><span class="params">(reply *HeartbeatReply, reducef <span class="keyword">func</span>(<span class="type">string</span>, []<span class="type">string</span>)</span></span> <span class="type">string</span>) &#123;</span><br><span class="line">   <span class="keyword">var</span> kva []KeyValue</span><br><span class="line">   <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; reply.NMap; i++ &#123;</span><br><span class="line">      filePath := generateMapResultFileName(i, reply.Id)</span><br><span class="line">      file, err := os.Open(filePath)</span><br><span class="line">      <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">         log.Fatalf(<span class="string">&quot;cannot open %v&quot;</span>, filePath)</span><br><span class="line">      &#125;</span><br><span class="line">      dec := json.NewDecoder(file)</span><br><span class="line">      <span class="keyword">for</span> &#123;</span><br><span class="line">         <span class="keyword">var</span> kv KeyValue</span><br><span class="line">         <span class="keyword">if</span> err := dec.Decode(&amp;kv); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">         &#125;</span><br><span class="line">         kva = <span class="built_in">append</span>(kva, kv)</span><br><span class="line">      &#125;</span><br><span class="line">      file.Close()</span><br><span class="line">   &#125;</span><br><span class="line">   results := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>][]<span class="type">string</span>)</span><br><span class="line">   <span class="keyword">for</span> _, kv := <span class="keyword">range</span> kva &#123;</span><br><span class="line">      results[kv.Key] = <span class="built_in">append</span>(results[kv.Key], kv.Value)</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   reduceFileName := generateReduceResultFileName(reply.Id)</span><br><span class="line">   tmpFile, err := os.CreateTemp(<span class="string">&quot;.&quot;</span>, reduceFileName)</span><br><span class="line">   <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">      log.Fatalf(<span class="string">&quot;cannot create tmp file %v&quot;</span>, reduceFileName)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span> key, values := <span class="keyword">range</span> results &#123;</span><br><span class="line">      output := reducef(key, values)</span><br><span class="line">      fmt.Fprintf(tmpFile, <span class="string">&quot;%v %v\n&quot;</span>, key, output)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> err := os.Rename(tmpFile.Name(), reduceFileName); err != <span class="literal">nil</span> &#123;</span><br><span class="line">      fmt.Errorf(<span class="string">&quot;cannot replace %q with tempfile %q: %v&quot;</span>,</span><br><span class="line">         reduceFileName, tmpFile.Name(), err)</span><br><span class="line">   &#125;</span><br><span class="line">   reportTask(JobFinishArgs&#123;reply.Id, ReducePhase&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>作为一个大学四年纯摆烂，啥代码也没写过的小白，这个lab1也是要了老命，不看大佬的思路根本无从下手。慢慢补救吧…</p>
-
     </div>
 
     
@@ -252,7 +256,7 @@
       <i class="fa fa-chevron-left"></i> 狼朋友
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/08/22/6.824/6-824-lab2%E6%80%BB%E7%BB%93/" rel="next" title="6.824-lab2总结">
+    <a href="/2023/08/22/6.824/6.824%20lab2%20raft/" rel="next" title="6.824-lab2总结">
       6.824-lab2总结 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
